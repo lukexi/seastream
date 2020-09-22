@@ -1,0 +1,12 @@
+[Unit]
+Description=Streams audio out to Seastream
+Wants=sound.target network-online.target
+After=sound.target network-online.target
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=/bin/su pi -l -c "/home/pi/seastream-out.sh"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
