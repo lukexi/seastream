@@ -6,13 +6,7 @@ echo $MACHINE_NAME > /etc/hostname
 echo 127.0.0.1  $MACHINE_NAME.localdomain    $MACHINE_NAME >> /etc/hosts
 
 # Set up Tailscale
-sudo apt-get install apt-transport-https
-curl https://pkgs.tailscale.com/stable/raspbian/buster.gpg | sudo apt-key add -
-curl https://pkgs.tailscale.com/stable/raspbian/buster.list | sudo tee /etc/apt/sources.list.d/tailscale.list
-sudo apt-get update
-sudo apt-get install tailscale
-echo "Copy and send this link to Luke!"
-sudo tailscale up
+
 
 # Install ffmpeg
 sudo apt-get install ffmpeg
