@@ -1,6 +1,6 @@
 # seastream
 
-* Copy files from piboot to SD card
+* Copy files to SD card
 * Edit `wpa_supplicant.conf` with your Wifi username and password
 * Boot the pi
 * In Terminal:
