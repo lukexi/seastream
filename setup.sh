@@ -18,6 +18,10 @@ if [[ $(hostname -s) -eq raspberrypi ]]; then
     sudo sh -c "echo 127.0.0.1  $MACHINE_NAME.localdomain    $MACHINE_NAME >> /etc/hosts"
 fi
 
+git config --global user.email "lukexi@me.com"
+git config --global user.name "Luke Iannini"
+git config --global alias.st status
+
 # Install ffmpeg
 sudo apt-get update --assume-yes
 sudo apt-get install ffmpeg --assume-yes
