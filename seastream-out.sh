@@ -1,3 +1,4 @@
+#!/bin/bash
 # Sets up a stream to the icecast server as configured in config-icecast.private
 # and direct streams to individual seastreamers
 # as listed in config-destinations.private
