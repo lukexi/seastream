@@ -6,6 +6,9 @@
 * In Terminal:
 ```
 ssh pi@raspberrypi.local
-/boot/setup.sh
+sudo apt-get install git
+git clone https://github.com/lukexi/seastream
+cd seastream
+./setup.sh
 ```
 * Send the Tailscale URL to me
