@@ -22,17 +22,10 @@ fi
 sudo apt-get update --assume-yes
 sudo apt-get install ffmpeg --assume-yes
 
-# Set up system services
-sudo cp seastream-in.service /etc/systemd/system/
-sudo cp seastream-out.service /etc/systemd/system/
-
-sudo systemctl enable seastream-in.service
-sudo systemctl enable seastream-out.service
-
-sudo systemctl start seastream-in.service
-sudo systemctl start seastream-out.service
-
 echo "Enter destinations in config-destinations.private"
+cp config-destinations.private.template config-destinations.private
 echo "Configure icecast in config-icecast.private"
-touch config-destinations.private
-touch config-icecast.private
+cp config-icecast.private.template config-icecast.private
+
+# Set up system services
+./seastream-start.sh
