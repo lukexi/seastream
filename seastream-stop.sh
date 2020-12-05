@@ -1,2 +1,2 @@
-sudo systemctl stop `pwd`/seastream-in.service
-sudo systemctl stop `pwd`/seastream-out.service
+sudo systemctl stop seastream-in
+sudo systemctl stop seastream-out
