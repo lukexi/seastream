@@ -11,7 +11,10 @@ ICECAST_URL="icecast://source:$ICECAST_PASSWORD@seastream.live:1234/$ICECAST_PAT
 STREAMS="[f=mp3]$ICECAST_URL"
 
 for DEST in $(cat config-destinations.private); do
-    STREAMS+="|[f=rtp]rtp://$DEST:1234"
+    DEST_IP=`host $DEST | awk '/has address/ { print $4 }'`
+    if [ ! -z "$DEST_IP" ]; then
+        STREAMS+="|[f=rtp]rtp://$DEST_IP:1234"
+    fi
 done
 
 # Streams directly to one remote destination and also to seastream.live Icecast
