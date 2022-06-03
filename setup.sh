@@ -26,10 +26,8 @@ git config --global alias.st status
 sudo apt-get update --assume-yes
 sudo apt-get install ffmpeg --assume-yes
 
-echo "Enter destinations in config-destinations.private"
-cp config-destinations.private.template config-destinations.private
-echo "Configure icecast in config-icecast.private"
-cp config-icecast.private.template config-icecast.private
+echo "Enter destinations, password and soundcard in config.private"
+cp config.private.template config.private
 
 # Set up system services
 ./seastream-start.sh

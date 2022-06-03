@@ -1,3 +1,6 @@
+# hosts to directly broadcast to
+DESTINATIONS="cartier"
+
 # The human-friendly name of the radio station
 ICECAST_NAME="Evolving Pink"
 
@@ -6,3 +9,6 @@ ICECAST_PATH=evolvingpink
 
 # The Seastream Icecast "source" user password to authenticate streaming
 ICECAST_PASSWORD=
+
+# The name of the soundcard as given by "arecord -l"
+SOUNDCARD=MGXU

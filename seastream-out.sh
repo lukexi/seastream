@@ -11,14 +11,12 @@ ICECAST_URL="icecast://source:$ICECAST_PASSWORD@$ICECAST_SERVER/$ICECAST_PATH"
 
 STREAMS="[f=mp3]$ICECAST_URL"
 
-for DEST in $(cat config-destinations.private); do
+for DEST in $(cat /home/pi/seastream/config-destinations.private); do
     DEST_IP=`host $DEST | awk '/has address/ { print $4 }'`
     if [ ! -z "$DEST_IP" ]; then
         STREAMS+="|[f=rtp]rtp://$DEST_IP:1234"
     fi
 done
-
-SOUNDCARD=hw:audioinjectorpi
 
 # Streams directly to one remote destination and also to seastream.live icecast
 # Uses workaround for high CPU usage bug in ffmpeg+alsa (-f alsa -i plughw:0) by getting audio via arecord instead
