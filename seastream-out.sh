@@ -5,7 +5,7 @@
 
 ENCODING_QUALITY=320k
 
-source /home/pi/seastream/config-icecast.private
+source /home/pi/seastream/config.private
 ICECAST_SERVER=seastream.live:1234
 ICECAST_URL="icecast://source:$ICECAST_PASSWORD@$ICECAST_SERVER/$ICECAST_PATH"
 
