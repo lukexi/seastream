@@ -20,8 +20,8 @@ done
 
 # Streams directly to one remote destination and also to seastream.live icecast
 # Uses workaround for high CPU usage bug in ffmpeg+alsa (-f alsa -i plughw:0) by getting audio via arecord instead
-arecord -q -N -M -t raw -D $SOUNDCARD -c 2 -r 48000 -f S16_LE | \
-    ffmpeg -f s16le -ac 2 -ar 48000 -i - \
+arecord -q -N -M -t raw -D $SOUNDCARD -c 2 -r 48000 -f S32_LE | \
+    ffmpeg -f s32le -ac 2 -ar 48000 -i - \
     -b:a $ENCODING_QUALITY -c:a libmp3lame \
     -content_type audio/mpeg -ice_name "$ICECAST_NAME" \
     -f tee -map 0 $STREAMS
