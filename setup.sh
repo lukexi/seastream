@@ -3,12 +3,22 @@
 # Set up Tailscale
 if [[ $(dpkg-query -W -f='${Status}' tailscale 2>/dev/null | grep -c "ok installed") -eq 0 ]]; then
     sudo apt-get install apt-transport-https --assume-yes
-    curl https://pkgs.tailscale.com/stable/raspbian/buster.gpg | sudo apt-key add -
-    curl https://pkgs.tailscale.com/stable/raspbian/buster.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+    curl -fsSL https://pkgs.tailscale.com/stable/raspbian/bullseye.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg > /dev/null
+    curl -fsSL https://pkgs.tailscale.com/stable/raspbian/bullseye.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
     sudo apt-get update --assume-yes
     sudo apt-get install tailscale --assume-yes
     sudo tailscale up
 fi
+
+# Allow audio access
+sudo adduser pi audio
+
+# Set up audioinjector driver
+echo 'dtoverlay=audioinjector-wm8731-audio' | sudo tee -a /boot/config.txt
+
+# Set up for Adafruit OLED Hat
+echo 'dtparam=i2c_arm=on' | sudo tee -a /boot/config.txt
+sudo apt-get install -y i2c-tools
 
 # Set the Pi's hostname
 if [[ $(hostname -s) -eq raspberrypi ]]; then
@@ -28,6 +38,11 @@ sudo apt-get install ffmpeg --assume-yes
 
 echo "Enter destinations, password and soundcard in config.private"
 cp config.private.template config.private
+
+# Install samba
+sudo apt-get install samba
+sudo cp smb.conf /etc/samba/smb.conf
+sudo systemctl restart smbd
 
 # Set up system services
 ./seastream-start.sh
