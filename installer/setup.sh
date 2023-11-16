@@ -1,23 +1,20 @@
 #!/bin/bash
 
 # Set up Tailscale
-if [[ $(dpkg-query -W -f='${Status}' tailscale 2>/dev/null | grep -c "ok installed") -eq 0 ]]; then
-    sudo apt-get install apt-transport-https --assume-yes
-    curl -fsSL https://pkgs.tailscale.com/stable/raspbian/bullseye.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg > /dev/null
-    curl -fsSL https://pkgs.tailscale.com/stable/raspbian/bullseye.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
-    sudo apt-get update --assume-yes
-    sudo apt-get install tailscale --assume-yes
-    sudo tailscale up
-fi
+installer/setup-1-tailscale.sh
 
 # Allow audio access
 sudo adduser pi audio
+# Allow i2c access
+sudo adduser pi i2c
 
-# Set up audioinjector driver
+# Set up audioinjector driver https://github.com/Audio-Injector/stereo-and-zero
 echo 'dtoverlay=audioinjector-wm8731-audio' | sudo tee -a /boot/config.txt
+amixer -D hw:CARD=audioinjectorpi set 'Output Mixer HiFi' unmute
 
 # Set up for Adafruit OLED Hat
 echo 'dtparam=i2c_arm=on' | sudo tee -a /boot/config.txt
+echo 'dtparam=i2c_baudrate=1000000' | sudo tee -a /boot/config.txt
 sudo apt-get install -y i2c-tools
 
 # Set the Pi's hostname
@@ -42,6 +39,8 @@ cp config.private.template config.private
 # Install samba
 sudo apt-get install samba
 sudo cp smb.conf /etc/samba/smb.conf
+echo "Enter pi password"
+sudo smbpasswd -a pi
 sudo systemctl restart smbd
 
 # Set up system services

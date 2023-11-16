@@ -1,4 +1,4 @@
-# hosts to directly broadcast to
+# hosts to directly broadcast to, space separated
 DESTINATIONS="cartier"
 
 # The human-friendly name of the radio station
@@ -11,4 +11,4 @@ ICECAST_PATH=evolvingpink
 ICECAST_PASSWORD=
 
 # The name of the soundcard as given by "arecord -l"
-SOUNDCARD=MGXU
+SOUNDCARD=plughw:MGXU

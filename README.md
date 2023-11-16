@@ -23,3 +23,11 @@ cp -u config.private.template config.private
 # set destinations, enter password, set soundcard name
 nano config.private
 ```
+
+NOTES:
+Audio Injector needs to have the
+"Line" parameter set to CAPTURE L R, 
+which you can do by opening alsamixer,
+pressing F4 to go to "Capture" params,
+and pressing Spacebar on the Line param.
+TODO: There should be a way to do this via "amixer".
