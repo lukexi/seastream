@@ -7,6 +7,7 @@ After=systemd-user-sessions.service
 [Service]
 User=pi
 ExecStart=/home/pi/seastream/streamers/seastream-out.sh
+WorkingDirectory=/home/pi/seastream
 Restart=always
 
 [Install]
