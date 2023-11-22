@@ -1,1 +1,0 @@
-amixer sset 'Line' cap

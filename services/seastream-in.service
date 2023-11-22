@@ -5,8 +5,8 @@ After=sound.target network-online.target
 After=systemd-user-sessions.service
 
 [Service]
-User=pi
 ExecStart=/home/pi/seastream/streamers/seastream-in.sh
+User=pi
 Restart=always
 
 [Install]

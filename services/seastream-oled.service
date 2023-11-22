@@ -1,8 +1,8 @@
 [Unit]
 Description=Update OLED
 [Service]
+ExecStart=sh -c /home/pi/seastream/services/seastream-oled.sh
 Type=oneshot
-ExecStart=sh -c /home/pi/seastream/scripts/update-status-oled.sh
 User=pi
 WorkingDirectory=/home/pi/seastream
 Restart=Always
