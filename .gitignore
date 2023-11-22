@@ -1,3 +1,6 @@
 *.private
 *.mp3
+*.d
+*.o
 .DS_Store
+ssd1306_bin
