@@ -1,7 +1,8 @@
 [Unit]
 Description=Update OLED
 [Timer]
-OnUnitActiveSec=1s
 AccuracySec=1s
+OnBootSec=1s
+OnUnitActiveSec=1s
 [Install]
 WantedBy=timers.target

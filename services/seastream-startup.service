@@ -5,10 +5,9 @@ After=sound.target
 After=systemd-user-sessions.service
 
 [Service]
-ExecStart=/home/pi/seastream/services/seastream-startup.sh
+ExecStart=sh -c /home/pi/seastream/services/seastream-startup.sh
 WorkingDirectory=/home/pi/seastream
 User=pi
-Restart=always
 
 [Install]
 WantedBy=multi-user.target

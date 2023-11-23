@@ -5,4 +5,3 @@ ExecStart=sh -c /home/pi/seastream/services/seastream-oled.sh
 Type=oneshot
 User=pi
 WorkingDirectory=/home/pi/seastream
-Restart=Always
