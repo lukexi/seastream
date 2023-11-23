@@ -2,13 +2,13 @@
 DESTINATIONS="cartier"
 
 # The human-friendly name of the radio station
-ICECAST_NAME="Evolving Pink"
+ARTIST_NAME="Evolving Pink"
 
 # What path to use on seastream.live, e.g. evolvingpink to get seastream.live/evolvingpink
-ICECAST_PATH=evolvingpink
+ARTIST_PATH=evolvingpink
 
 # The Seastream Icecast "source" user password to authenticate streaming
 ICECAST_PASSWORD=
 
 # The name of the soundcard as given by "arecord -l"
-SOUNDCARD=plughw:MGXU
+SOUNDCARD=MGXU

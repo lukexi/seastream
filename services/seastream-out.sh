@@ -8,9 +8,9 @@ ENCODING_QUALITY=320k
 source /home/pi/seastream/config.private
 
 ICECAST_SERVER=seastream.live:1234
-ICECAST_URL="icecast://source:$ICECAST_PASSWORD@$ICECAST_SERVER/$ICECAST_PATH"
+ICECAST_URL="icecast://source:$ICECAST_PASSWORD@$ICECAST_SERVER/$ARTIST_PATH"
 
-STREAMS="[f=mp3:ice_name=$ICECAST_NAME]$ICECAST_URL"
+STREAMS="[f=mp3:ice_name=$ARTIST_NAME]$ICECAST_URL"
 
 for DEST in $DESTINATIONS; do
     DEST_IP=`host $DEST | awk '/has address/ { print $4 }'`
@@ -19,8 +19,9 @@ for DEST in $DESTINATIONS; do
     fi
 done
 
-# Record 1-hour chunks, labelled with artist and time
-STREAMS+="|[f=segment:segment_time=3600:strftime=1:segment_atclocktime=1]$ICECAST_PATH-%Y-%m-%d_%I-%M-%S_%p_%z.mp3"
+# Record 1-hour chunks every hour on the hour, labelled with artist and time
+STREAMS+="|[f=segment:segment_time=3600:strftime=1:segment_atclocktime=1]"
+STREAMS+="$ARTIST_PATH-%Y-%m-%d_%I-%M-%S_%p_%z.part.mp3"
 # TODO: upload these to proyekto, only if sox says they have audio content, otherwise delete.
 
 # Streams to all $STREAMS
