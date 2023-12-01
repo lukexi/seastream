@@ -19,13 +19,21 @@ for DEST in $DESTINATIONS; do
     fi
 done
 
-# Record 1-hour chunks every hour on the hour, labelled with artist and time
-STREAMS+="|[f=segment:segment_time=3600:strftime=1:segment_atclocktime=1]"
-STREAMS+="$ARTIST_PATH-%Y-%m-%d_%I-%M-%S_%p_%z.part.mp3"
-# TODO: upload these to proyekto, only if sox says they have audio content, otherwise delete.
+RECORD_DIR=recordings # FUTURE: make this configurable for external HDD etc.
+mkdir -p "$RECORD_DIR"
+
+AVAIL_HD_SPACE=`df $RECORD_DIR --output=avail | tail -n1`
+# Check for at least 1GB free
+if [[ $AVAIL_HD_SPACE -gt 1000000 ]]; then
+    # Record 1-hour chunks every hour on the hour
+    STREAMS+="|[f=segment:segment_time=3600:strftime=1:segment_atclocktime=1]"
+    # chunk filename - year month day am/pm hour minute second timezone
+    STREAMS+="$RECORD_DIR/$ARTIST_PATH-%Y-%m-%d_%p_%I-%M-%S_%z.part.mp3"
+fi
 
 # Streams to all $STREAMS
-# Uses workaround for high CPU usage bug in ffmpeg+alsa (-f alsa -i plughw:0) by getting audio via arecord instead
+# (Uses workaround for high CPU usage bug in 
+# ffmpeg+alsa (-f alsa -i plughw:0) by getting audio via arecord instead)
 arecord -q -N -M -t raw -D plughw:$SOUNDCARD -c 2 -r 48000 -f S32_LE | \
     ffmpeg -f s32le -ac 2 -ar 48000 -i - \
     -b:a $ENCODING_QUALITY -c:a libmp3lame \
