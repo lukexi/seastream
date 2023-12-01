@@ -1,12 +1,12 @@
-# or lsof -f file.mp3 for each file?
-active_recording=`lsof -c ffmpeg +D recordings/`
-echo Active recording: $active_recording
-
 # run at 5 minutes after the hour
 for sample in `ls recordings/*.part.mp3`; do
-    is_active=`lsof -f -- "$sample"`
-    echo "> In use? $is_active"
-    bash services/seastream-analyze.sh $sample
+    # -Fa means show access type, 'aw' means accessed for writing
+    is_being_written=`lsof -Fa -- $sample | tail -n 1`
+    if [[ $is_being_written == "aw" ]]; then
+        echo "Skipping active recording: $sample ..."
+    else
+        bash services/seastream-analyze.sh $sample
+    fi
 done
 
 # for sample in `ls *.part.mp3`; do
