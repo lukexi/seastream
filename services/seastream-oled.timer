@@ -1,5 +1,5 @@
 [Unit]
-Description=Update OLED
+Description=Update Seastream OLED
 [Timer]
 AccuracySec=1s
 OnBootSec=1s

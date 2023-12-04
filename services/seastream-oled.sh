@@ -3,7 +3,7 @@
 stream_state=`systemctl show seastream-out -P ActiveState`
 wifi_name=`iwgetid -r`
 disk_free=`df -h / --output=avail | tail -n1`
-num_recordings=`find /home/pi/seastream -maxdepth 1 -type f -name "*.mp3" | wc -l`
+num_recordings=`find /home/pi/seastream/recordings -maxdepth 1 -type f -name "*.mp3" | wc -l`
 
 screen="\n"
 screen+="seastream: $stream_state\n"
