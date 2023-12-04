@@ -10,7 +10,7 @@ source /home/pi/seastream/config.private
 ICECAST_SERVER=seastream.live:1234
 ICECAST_URL="icecast://source:$ICECAST_PASSWORD@$ICECAST_SERVER/$ARTIST_PATH"
 
-STREAMS="[f=mp3:ice_name=$ARTIST_NAME]$ICECAST_URL"
+STREAMS="[f=mp3:ice_name='$ARTIST_NAME']$ICECAST_URL"
 
 for DEST in $DESTINATIONS; do
     DEST_IP=`host $DEST | awk '/has address/ { print $4 }'`
@@ -39,4 +39,4 @@ arecord -q -N -M -t raw -D plughw:$SOUNDCARD -c 2 -r 48000 -f S32_LE | \
     ffmpeg -f s32le -ac 2 -ar 48000 -i - \
     -b:a $ENCODING_QUALITY -c:a libmp3lame \
     -content_type audio/mpeg \
-    -f tee -map 0 $STREAMS
+    -f tee -map 0 "$STREAMS"
