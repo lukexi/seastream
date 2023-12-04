@@ -1,0 +1,7 @@
+[Unit]
+Description=Analyze and upload Seastream recordings
+[Service]
+ExecStart=sh -c /home/pi/seastream/services/seastream-upload-recordings.sh
+Type=oneshot
+User=pi
+WorkingDirectory=/home/pi/seastream

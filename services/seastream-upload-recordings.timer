@@ -1,0 +1,6 @@
+[Unit]
+Description=Analyze and upload Seastream recordings every hour
+[Timer]
+OnCalendar=00/1:05
+[Install]
+WantedBy=timers.target
