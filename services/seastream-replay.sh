@@ -13,6 +13,9 @@ CMD+="ffmpeg"
 for file in $FILES; do
     CMD+=" -i $file"
 end
+
+# CMD+=" -stream_loop -1" # TODO check syntax and that this works
+
 CMD+=" -filter_complex"
 CROSS_DURATION=5
 FROM=0
