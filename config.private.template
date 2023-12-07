@@ -1,5 +1,5 @@
 # hosts to directly broadcast to, space separated
-DESTINATIONS="cartier"
+DESTINATIONS="seastream-seastone"
 
 # The human-friendly name of the radio station
 ARTIST_NAME="Evolving Pink"
@@ -11,4 +11,7 @@ ARTIST_PATH=evolvingpink
 ICECAST_PASSWORD=
 
 # The name of the soundcard as given by "arecord -l"
-SOUNDCARD=MGXU
+# Where to record/stream from
+SOUNDCARD_RECORD_FROM=MGXU
+# Where to play incoming audio from a remote seastream
+SOUNDCARD_PLAYBACK_TO=MGXU

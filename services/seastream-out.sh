@@ -15,7 +15,7 @@ STREAMS="[f=mp3:ice_name='$ARTIST_NAME']$ICECAST_URL"
 for DEST in $DESTINATIONS; do
     DEST_IP=`host $DEST | awk '/has address/ { print $4 }'`
     if [ ! -z "$DEST_IP" ]; then
-        STREAMS+="|[f=rtp]rtp://$DEST_IP:1234"
+        STREAMS+="|[f=rtp]rtp://$DEST_IP:5678"
     fi
 done
 
@@ -35,7 +35,7 @@ fi
 # Streams to all $STREAMS
 # (Uses workaround for high CPU usage bug in 
 # ffmpeg+alsa (-f alsa -i plughw:0) by getting audio via arecord instead)
-arecord -q -N -M -t raw -D plughw:$SOUNDCARD -c 2 -r 48000 -f S32_LE | \
+arecord -q -N -M -t raw -D plughw:$SOUNDCARD_RECORD_FROM -c 2 -r 48000 -f S32_LE | \
     ffmpeg -f s32le -ac 2 -ar 48000 -i - \
     -b:a $ENCODING_QUALITY -c:a libmp3lame \
     -content_type audio/mpeg \
