@@ -14,6 +14,6 @@ if [[ $amplitude_percent -gt 2 ]]; then
     mv "$sample" "$sample_ok"
     bash services/seastream-upload.sh "$sample_ok"
 else
-    echo "> $sample is silent!"
-    mv "$sample" silent/
+    echo "> $sample is silent, deleting"
+    rm "$sample"
 fi

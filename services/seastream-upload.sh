@@ -1,13 +1,13 @@
 source=$1
-destination=proyekto.net:proyekto-server/files/seastream-archive
-echo "Uploading $source (if needed) to $destination..."
-rsync --progress --times $source $destination
-status=`rsync --times --dry-run --itemize-changes $source $destination`
-success=$?
-echo Status: $status
-if [[ $status == ">f"* ]]; then
-    echo "File still needs upload"
-elif [[ $success == 0 ]]; then
-    echo "File is uploaded OK!"
-    mv $source uploaded/
+archive_destination=seastream-seastone:seastream-archive
+proyekto_destination=proyekto.net:proyekto-server/files/seastream-archive
+
+# Upload to proyekto if created between 4-6am
+if [[ $source == *_AM_04*.mp3 || $source == *_AM_05*.mp3 ]]; then
+    echo "Uploading $source from 4-6am to $proyekto_destination"
+    rsync --remove-source-files --progress --times $source $proyekto_destination
 fi
+
+# Upload all files to archive drive
+echo "Uploading $source (if needed) to $destination..."
+rsync --remove-source-files --progress --times $source $archive_destination
