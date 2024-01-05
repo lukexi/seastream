@@ -7,12 +7,11 @@ inverse_amp=${inverse_amp_float%.*}
 amplitude_percent=$((100/inverse_amp))
 echo Amplitude level: $amplitude_percent / 100
 
-sample_ok=${sample%.part.mp3}.mp3
+sample_ok=${sample%.part}
 
 if [[ $amplitude_percent -gt 2 ]]; then
     echo "> $sample has audio, uploading..."
     mv "$sample" "$sample_ok"
-    bash services/seastream-upload.sh "$sample_ok"
 else
     echo "> $sample is silent, deleting"
     rm "$sample"

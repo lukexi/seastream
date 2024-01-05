@@ -1,5 +1,6 @@
 source=$1
-archive_destination=seastream-seastone:seastream-archive
+# archive_destination=seastream-seastone:seastream-archive
+archive_destination=ladybug:seastream-archive
 proyekto_destination=proyekto.net:proyekto-server/files/seastream-archive
 
 # Upload to proyekto if created between 4-6am
