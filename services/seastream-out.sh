@@ -28,7 +28,7 @@ if [[ $AVAIL_HD_SPACE -gt 1000000 ]]; then
     # Record 1-hour chunks every hour on the hour
     STREAMS+="|[f=segment:segment_time=3600:strftime=1:segment_atclocktime=1]"
     # chunk filename - year month day am/pm hour minute second timezone
-    STREAMS+="$RECORD_DIR/$ARTIST_PATH-%Y-%m-%d_%p_%I-%M-%S_%z.mp3.part"
+    STREAMS+="$RECORD_DIR/$ARTIST_PATH-%Y-%m-%d_%p_%I-%M-%S_%z.part.mp3"
 fi
 
 # Streams to all $STREAMS
